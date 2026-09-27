@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jadwal Kuliah Semester 7 • Thumbelina Floral Garden</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            script: ['"Dancing Script"', 'cursive'],
+          },
+          colors: {
+            thumbelina: {
+              50: '#fff5f7',
+              100: '#ffe4ea',
+              200: '#fecdd8',
+              300: '#fea3b8',
+              400: '#fb6f92',
+              500: '#f43f71',
+              600: '#e11d56',
+              700: '#be1245',
+              petal: '#ffeef2',
+              leaf: '#628e6c',
+              leafLight: '#eaf4ec',
+              gold: '#d4af37',
+              goldSoft: '#fbf4dc',
+              lavender: '#efe8f8',
+              lavenderText: '#6f42c1',
+              sky: '#e6f3f8',
+            }
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-8px) rotate(1.5deg)' },
+            },
+            pulseSlow: {
+              '0%, 100%': { opacity: '0.9', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.03)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            }
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+            'float-delayed': 'float 7s ease-in-out 2s infinite',
+            pulseSlow: 'pulseSlow 4s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fff5f7;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #fecdd8;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #fb6f92;
+    }
+
+    /* Subtle Glassmorphism Card Style */
+    .fairy-glass {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(254, 205, 216, 0.6);
+      box-shadow: 0 15px 35px -10px rgba(244, 63, 113, 0.12), 0 5px 15px rgba(0, 0, 0, 0.03);
+    }
+    
+    .fairy-glass-banner {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 245, 247, 0.82) 100%);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(254, 205, 216, 0.7);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-shadow-none {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+      }
+      #petals-canvas {
+        display: none !important;
+      }
+    }
+
+    /* Shimmering Badge */
+    .gold-shimmer {
+      background: linear-gradient(90deg, #d4af37 0%, #fff2b2 50%, #d4af37 100%);
+      background-size: 200% auto;
+      color: #5c4500;
+      animation: shimmer 4s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#fff7f9] via-[#fbf7f0] to-[#f4f8f5] min-h-screen font-sans text-gray-800 antialiased selection:bg-pink-200 selection:text-pink-900 relative overflow-x-hidden">
+
+  <!-- Interactive Floating Petals Canvas -->
+  <canvas id="petals-canvas" class="fixed inset-0 pointer-events-none z-10 w-full h-full"></canvas>
+
+  <!-- Background Decorative Glowing Orbs -->
+  <div class="fixed top-[-100px] left-[-100px] w-96 h-96 bg-pink-300/25 rounded-full blur-3xl pointer-events-none -z-10 animate-pulseSlow"></div>
+  <div class="fixed bottom-[-100px] right-[-80px] w-96 h-96 bg-amber-200/30 rounded-full blur-3xl pointer-events-none -z-10 animate-float"></div>
+  <div class="fixed top-1/2 left-1/3 w-80 h-80 bg-emerald-200/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+  <!-- Main Container -->
+  <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    
+    <!-- Top Bar with Fairy Toggle, Live Time & Controls -->
+    <header class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-pink-400 to-rose-300 flex items-center justify-center text-white shadow-lg shadow-pink-300/40 ring-4 ring-pink-100 animate-float">
+          <i class="fa-solid fa-seedling text-lg"></i>
+        </div>
+        <div>
+          <span class="font-script text-2xl text-pink-600 font-semibold tracking-wide">Thumbelina's Secret Garden</span>
+          <p class="text-xs text-stone-500 font-medium tracking-wider uppercase">Jadwal Kuliah Akademik • Semester 7</p>
+        </div>
+      </div>
+
+      <!-- Live Clock & Interactive Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 no-print">
+        <!-- Live Clock Pill -->
+        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-pink-200/80 shadow-sm text-xs font-semibold text-gray-700 backdrop-blur-md">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="live-day-date">Memuat waktu...</span>
+          <span class="text-pink-400">|</span>
+          <span id="live-time" class="font-mono text-pink-600 font-bold">--:--:--</span>
+        </div>
+
+        <!-- Wallpaper 9:16 Button -->
+        <button onclick="openPosterModal()" title="Lihat & Download Poster Jadwal 9:16 untuk Layar HP" class="px-3.5 py-2 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/80 text-xs font-medium transition-all duration-200 flex items-center gap-1.5 shadow-sm active:scale-95">
+          <i class="fa-solid fa-mobile-screen-button text-amber-600"></i>
+          <span>Wallpaper HP (9:16)</span>
+        </button>
+
+        <!-- Petals Animation Toggle -->
+        <button id="toggle-petals-btn" onclick="togglePetalsAnimation()" title="Nyalakan/Matikan Efek Kelopak Bunga" class="px-3.5 py-2 rounded-full bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200/80 text-xs font-medium transition-all duration-200 flex items-center gap-1.5 shadow-sm active:scale-95">
+          <i class="fa-solid fa-wand-magic-sparkles text-pink-500"></i>
+          <span id="petals-btn-text">Kelopak Bunga: Aktif</span>
+        </button>
+
+        <!-- Print / PDF Button -->
+        <button onclick="window.print()" class="px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white text-xs font-semibold shadow-md shadow-pink-400/30 transition-all duration-200 flex items-center gap-2 active:scale-95">
+          <i class="fa-solid fa-print"></i>
+          <span>Cetak Jadwal</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Banner with Thumbelina Lotus Artwork & Semester Overview -->
+    <div class="relative overflow-hidden rounded-3xl fairy-glass-banner shadow-2xl p-6 sm:p-8 md:p-10 mb-10 border border-pink-200/90">
+      
+      <!-- Flower & Leaf Corner Accents -->
+      <div class="absolute top-0 right-0 -mr-8 -mt-8 w-44 h-44 opacity-25 pointer-events-none">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 0C100 55.2285 55.2285 100 0 100C55.2285 100 100 144.772 100 200C100 144.772 144.772 100 200 100C144.772 100 100 55.2285 100 0Z" fill="#f43f71"/>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        
+        <!-- Left: Title, Fairytale quote, and quick summary -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-100/80 border border-pink-300/60 text-pink-800 text-xs font-semibold uppercase tracking-wider">
+            <i class="fa-solid fa-spa text-pink-600"></i>
+            <span>Semester Ganjil 2026/2027</span>
+          </div>
+
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            Jadwal Perkuliahan <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-rose-500 to-amber-600 font-script text-4xl sm:text-5xl lg:text-6xl block mt-1">
+              Semester 7 • Thumbelina Series
+            </span>
+          </h1>
+
+          <p class="text-stone-600 text-sm sm:text-base leading-relaxed font-normal max-w-xl">
+            "Bagaikan Thumbelina yang bermekaran di dalam kelopak bunga teratai, setiap langkah studi di semester akhir ini memancarkan keindahan, dedikasi, dan tekad menuju kelulusan yang gemilang." 🌸✨
+          </p>
+
+          <!-- Stat Badges -->
+          <div class="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+            <div class="p-3 rounded-2xl bg-white/70 border border-pink-100 shadow-sm backdrop-blur-sm hover:border-pink-300 transition-colors">
+              <span class="block text-2xl font-bold font-serif text-pink-600">19</span>
+              <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Total SKS</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-white/70 border border-pink-100 shadow-sm backdrop-blur-sm hover:border-pink-300 transition-colors">
+              <span class="block text-2xl font-bold font-serif text-rose-600">6</span>
+              <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Mata Kuliah</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-white/70 border border-pink-100 shadow-sm backdrop-blur-sm hover:border-pink-300 transition-colors">
+              <span class="block text-2xl font-bold font-serif text-amber-600">5 Hari</span>
+              <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Senin — Sabtu</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-white/70 border border-pink-100 shadow-sm backdrop-blur-sm hover:border-pink-300 transition-colors">
+              <span class="block text-2xl font-bold font-serif text-emerald-600">Skripsi</span>
+              <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Fokus Utama</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Thumbelina Fairy Illustration with dreamy frame -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative group">
+            <!-- Glow around image -->
+            <div class="absolute -inset-2 bg-gradient-to-r from-pink-400 via-rose-300 to-amber-300 rounded-3xl blur-lg opacity-40 group-hover:opacity-60 transition duration-500"></div>
+            
+            <div class="relative rounded-2xl overflow-hidden border-2 border-white/80 shadow-xl bg-white">
+              <img 
+                src="assets/thumbelina.jpg" 
+                alt="Thumbelina Blossom Fairy Artwork" 
+                class="w-full max-w-sm sm:max-w-md h-56 sm:h-64 object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80';"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-pink-900/40 via-transparent to-transparent pointer-events-none"></div>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white text-xs drop-shadow-md">
+                <span class="font-script text-base text-pink-100">Thumbelina & The Magic Lotus</span>
+                <span class="bg-black/30 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20">Semangat Sem. 7 🌷</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Active Schedule Tracker / Today's Notice Bar -->
+    <div id="today-alert-container" class="mb-8">
+      <!-- Injected by JavaScript dynamically based on current day & time -->
+    </div>
+
+    <!-- Control Bar: Search, Day Filters, & View Toggle -->
+    <div class="fairy-glass rounded-2xl p-4 sm:p-5 mb-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 no-print">
+      
+      <!-- Day Filter Pills -->
+      <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 w-full md:w-auto">
+        <button onclick="filterDay('all')" class="day-filter-btn active-filter px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-pink-500 text-white shadow-sm shadow-pink-300/40" data-day="all">
+          <i class="fa-solid fa-border-all mr-1"></i> Semua
+        </button>
+        <button onclick="filterDay('Senin')" class="day-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200" data-day="Senin">
+          Senin
+        </button>
+        <button onclick="filterDay('Rabu')" class="day-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200" data-day="Rabu">
+          Rabu
+        </button>
+        <button onclick="filterDay('Kamis')" class="day-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200" data-day="Kamis">
+          Kamis
+        </button>
+        <button onclick="filterDay('Jumat')" class="day-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200" data-day="Jumat">
+          Jumat
+        </button>
+        <button onclick="filterDay('Sabtu')" class="day-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200" data-day="Sabtu">
+          Sabtu
+        </button>
+      </div>
+
+      <!-- Right Controls: Search & View Mode Switcher -->
+      <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+        <!-- Live Search Input -->
+        <div class="relative w-full sm:w-60">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-pink-400 text-xs"></i>
+          <input 
+            type="text" 
+            id="search-input" 
+            oninput="handleSearch(this.value)"
+            placeholder="Cari matkul / ruang..." 
+            class="w-full pl-9 pr-4 py-1.5 text-xs rounded-full bg-white/90 border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent text-gray-700 transition shadow-inner placeholder:text-stone-400"
+          >
+        </div>
+
+        <!-- View Mode Switch -->
+        <div class="flex items-center p-1 bg-pink-100/70 rounded-full border border-pink-200 shrink-0">
+          <button id="view-card-btn" onclick="setViewMode('cards')" title="Tampilan Kartu Estetik" class="px-3 py-1 rounded-full text-xs font-semibold transition-all bg-white text-pink-600 shadow-sm">
+            <i class="fa-solid fa-shapes"></i> <span class="hidden sm:inline ml-1">Kartu</span>
+          </button>
+          <button id="view-table-btn" onclick="setViewMode('table')" title="Tampilan Tabel Klasik" class="px-3 py-1 rounded-full text-xs font-semibold transition-all text-stone-600 hover:text-pink-600">
+            <i class="fa-solid fa-table"></i> <span class="hidden sm:inline ml-1">Tabel</span>
+          </button>
+          <button id="view-timeline-btn" onclick="setViewMode('timeline')" title="Tampilan Alur Mingguan" class="px-3 py-1 rounded-full text-xs font-semibold transition-all text-stone-600 hover:text-pink-600">
+            <i class="fa-solid fa-calendar-week"></i> <span class="hidden sm:inline ml-1">Mingguan</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== VIEW 1: FLORAL CARDS GRID ==================== -->
+    <section id="cards-view" class="transition-all duration-300">
+      <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Cards will be populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: BOTANICAL TABLE ==================== -->
+    <section id="table-view" class="hidden transition-all duration-300">
+      <div class="fairy-glass rounded-3xl overflow-hidden shadow-xl border border-pink-200/80">
+        <div class="p-5 sm:p-6 bg-gradient-to-r from-pink-100/90 via-rose-50/80 to-amber-50/70 border-b border-pink-200/60 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-pink-500 text-white flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-leaf"></i>
+            </span>
+            <div>
+              <h2 class="font-serif text-xl sm:text-2xl font-bold text-gray-800">Daftar Mata Kuliah Lengkap</h2>
+              <p class="text-xs text-stone-500">Tabel jadwal resmi Semester 7 dengan ruang kelas terbarukan</p>
+            </div>
+          </div>
+          <span class="hidden sm:inline-block px-3 py-1 rounded-full bg-pink-200/60 text-pink-800 font-semibold text-xs">
+            🌸 6 Mata Kuliah
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-pink-50/60 text-stone-600 border-b border-pink-200/50 uppercase tracking-wider text-xs font-bold">
+                <th class="py-4 px-6">Mata Kuliah</th>
+                <th class="py-4 px-6 text-center">Ruang / Kelas</th>
+                <th class="py-4 px-6 text-center">SKS</th>
+                <th class="py-4 px-6">Hari & Jam (WIB)</th>
+                <th class="py-4 px-6 text-center no-print">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="table-body" class="divide-y divide-pink-100/70 text-gray-700">
+              <!-- Table rows generated dynamically -->
+            </tbody>
+            <tfoot>
+              <tr class="bg-pink-50/40 font-semibold text-gray-800 border-t-2 border-pink-200">
+                <td class="py-4 px-6 font-serif text-base text-pink-800">Total Beban Studi</td>
+                <td class="py-4 px-6 text-center text-stone-500 text-xs">6 Ruangan Aktif</td>
+                <td class="py-4 px-6 text-center">
+                  <span class="inline-block px-3 py-1 rounded-full bg-pink-500 text-white font-bold text-xs shadow-sm">
+                    19 SKS
+                  </span>
+                </td>
+                <td class="py-4 px-6 text-stone-600 text-xs" colspan="2">Senin s/d Sabtu</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: WEEKLY TIMELINE ==================== -->
+    <section id="timeline-view" class="hidden transition-all duration-300">
+      <div class="space-y-6" id="timeline-container">
+        <!-- Populated dynamically by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Empty State Notification (if search / filter results are empty) -->
+    <div id="empty-state" class="hidden py-16 text-center fairy-glass rounded-3xl p-8">
+      <div class="w-16 h-16 rounded-full bg-pink-100 text-pink-500 flex items-center justify-center mx-auto text-2xl mb-3">
+        <i class="fa-solid fa-seedling"></i>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-stone-700 mb-1">Tidak ada jadwal ditemukan</h3>
+      <p class="text-sm text-stone-500 max-w-sm mx-auto">Tidak ada jadwal yang cocok dengan kata kunci atau filter hari yang dipilih.</p>
+      <button onclick="filterDay('all'); document.getElementById('search-input').value=''; handleSearch('');" class="mt-4 px-4 py-2 rounded-full bg-pink-500 text-white text-xs font-semibold shadow hover:bg-pink-600 transition">
+        Reset Pencarian
+      </button>
+    </div>
+
+    <!-- Fairy Garden Inspiration & Notes Section -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 no-print">
+      
+      <!-- Card 1: Thumbelina Wisdom -->
+      <div class="fairy-glass p-6 rounded-3xl border border-pink-200/80 shadow-md flex flex-col justify-between hover:shadow-lg transition">
+        <div>
+          <div class="w-10 h-10 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center text-lg mb-3 shadow-sm">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <h3 class="font-serif text-lg font-bold text-gray-800 mb-1">Pesan Kecil dari Thumbelina</h3>
+          <p class="text-xs text-stone-600 leading-relaxed font-normal">
+            "Walaupun terlihat mungil dan rintangan tugas skripsi tampak raksasa, tekad yang tulus dan ketekunan belajar akan mengantarkan kita mekar dengan indah di saat yang tepat." 🌸
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-pink-100 flex items-center justify-between text-xs text-pink-600 font-semibold">
+          <span>#SemangatSemester7</span>
+          <span>✨ Blossoming</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Interactive Personal Sticky Notes (LocalStorage) -->
+      <div class="fairy-glass p-6 rounded-3xl border border-pink-200/80 shadow-md flex flex-col justify-between md:col-span-2 hover:shadow-lg transition">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg shadow-sm">
+                <i class="fa-solid fa-feather-pointed"></i>
+              </span>
+              <div>
+                <h3 class="font-serif text-lg font-bold text-gray-800">Catatan & Target Belajar</h3>
+                <p class="text-xs text-stone-500">Tersimpan otomatis di browsermu</p>
+              </div>
+            </div>
+            <button onclick="saveQuickNote()" class="px-3 py-1 rounded-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold shadow transition active:scale-95">
+              <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan
+            </button>
+          </div>
+          
+          <textarea 
+            id="quick-sticky-note" 
+            rows="3" 
+            placeholder="Tuliskan target minggu ini, deadline proposal skripsi, atau catatan penting kuliah di sini..."
+            class="w-full p-3 rounded-2xl bg-amber-50/50 border border-amber-200/70 focus:outline-none focus:ring-2 focus:ring-amber-300 text-xs text-stone-700 resize-none font-sans placeholder:text-stone-400"
+          ></textarea>
+        </div>
+        <div class="mt-2 flex items-center justify-between text-[11px] text-stone-400">
+          <span id="note-saved-status">Catatan tersinkronisasi</span>
+          <span>🌱 Siap untuk bimbingan & praktikum</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-14 pt-8 pb-4 border-t border-pink-200/60 text-center text-xs text-stone-500 space-y-2 no-print">
+      <div class="flex items-center justify-center gap-2 text-pink-600 font-script text-xl">
+        <span>Thumbelina Floral Schedule</span>
+        <span>•</span>
+        <span>Semester 7</span>
+      </div>
+      <p class="text-stone-400">
+        Didesain dengan nuansa estetika bunga Thumbelina • HTML & Tailwind CSS
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Detail & Task Modal -->
+  <div id="course-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div id="modal-card" class="fairy-glass w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-pink-200 transform scale-95 transition-transform duration-300 relative overflow-hidden bg-white/95">
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <div class="flex items-center gap-3">
+          <div id="modal-flower-icon" class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl text-white shadow-md">
+            🌸
+          </div>
+          <div>
+            <span id="modal-day-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider"></span>
+            <h3 id="modal-course-name" class="font-serif text-2xl font-bold text-gray-800 leading-snug mt-1"></h3>
+          </div>
+        </div>
+        <button onclick="closeCourseModal()" class="w-8 h-8 rounded-full bg-pink-50 hover:bg-pink-100 text-pink-700 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Info Details -->
+      <div class="grid grid-cols-2 gap-3 mb-5 p-3 rounded-2xl bg-pink-50/50 border border-pink-100 text-xs">
+        <div>
+          <span class="text-stone-500 block">Ruang / Kode Kelas:</span>
+          <span id="modal-room-code" class="font-bold text-pink-600 font-mono text-sm"></span>
+        </div>
+        <div>
+          <span class="text-stone-500 block">Bobot SKS:</span>
+          <span id="modal-sks-count" class="font-bold text-gray-800 text-sm"></span>
+        </div>
+        <div>
+          <span class="text-stone-500 block">Waktu Kuliah:</span>
+          <span id="modal-time-range" class="font-semibold text-gray-700"></span>
+        </div>
+        <div>
+          <span class="text-stone-500 block">Tipe Kegiatan:</span>
+          <span id="modal-category" class="font-semibold text-emerald-700"></span>
+        </div>
+      </div>
+
+      <!-- Description / Tips -->
+      <div class="mb-5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-pink-700 mb-1 flex items-center gap-1.5">
+          <i class="fa-solid fa-sparkles"></i> Catatan & Karakteristik Matkul
+        </h4>
+        <p id="modal-description" class="text-xs text-stone-600 leading-relaxed bg-white/80 p-3 rounded-xl border border-pink-100"></p>
+      </div>
+
+      <!-- Course Checklist / To-Do -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-pink-700 flex items-center justify-between">
+          <span><i class="fa-solid fa-list-check"></i> Checklist Tugas Matkul Ini</span>
+          <span class="text-[11px] font-normal text-stone-400">Centang saat selesai</span>
+        </h4>
+        <div id="modal-tasks-container" class="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+          <!-- Dynamically filled -->
+        </div>
+        <div class="flex gap-2 pt-2">
+          <input 
+            type="text" 
+            id="new-task-input" 
+            placeholder="Tambah tugas/reminder baru..." 
+            class="flex-1 px-3 py-1.5 text-xs rounded-xl bg-pink-50/50 border border-pink-200 focus:outline-none focus:ring-1 focus:ring-pink-400"
+            onkeydown="if(event.key === 'Enter') addModalTask()"
+          >
+          <button onclick="addModalTask()" class="px-3 py-1.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white text-xs font-semibold shadow-sm transition">
+            Tambah
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-pink-100 flex justify-end">
+        <button onclick="closeCourseModal()" class="px-5 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 text-white text-xs font-semibold shadow-md hover:opacity-95 transition">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Poster Wallpaper (9:16) Modal -->
+  <div id="poster-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-900/60 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+    <div id="poster-modal-card" class="fairy-glass w-full max-w-sm sm:max-w-md rounded-3xl p-5 sm:p-6 shadow-2xl border-2 border-pink-200 transform scale-95 transition-transform duration-300 relative overflow-hidden bg-white/95 flex flex-col items-center max-h-[92vh]">
+      
+      <div class="w-full flex items-center justify-between pb-3 mb-2 border-b border-pink-100">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🌸</span>
+          <h3 class="font-serif text-lg font-bold text-gray-800">Poster & Wallpaper HP (9:16)</h3>
+        </div>
+        <button onclick="closePosterModal()" class="w-8 h-8 rounded-full bg-pink-50 hover:bg-pink-100 text-pink-700 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Poster Image Display -->
+      <div class="relative w-full rounded-2xl overflow-hidden border border-pink-200 shadow-md group my-2 flex justify-center bg-pink-50">
+        <img 
+          id="poster-img-element"
+          src="assets/jadwal_thumbelina_916.jpg" 
+          alt="Poster Jadwal Kuliah Semester 7 Thumbelina 9:16" 
+          class="w-full h-auto max-h-[62vh] object-contain rounded-2xl transition duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
+
+      <!-- Action buttons -->
+      <div class="w-full pt-3 flex items-center justify-between gap-3 text-xs">
+        <span class="text-stone-500 text-[11px]">Format 9:16 • Cocok untuk Lockscreen HP</span>
+        <div class="flex gap-2">
+          <a 
+            href="assets/jadwal_thumbelina_916.jpg" 
+            download="Jadwal_Semester7_Thumbelina_9x16.jpg"
+            class="px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white font-semibold shadow-md transition flex items-center gap-1.5 active:scale-95"
+          >
+            <i class="fa-solid fa-download"></i> Unduh Foto
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Jadwal Semester 7 Data
+    // Kelas diganti sesuai instruksi user:
+    // Analisis Media Sosial: H1302
+    // Data Science: H3201
+    // Proposal Skripsi: H3203
+    // Proyek Teknologi Informasi: H1403
+    // Visi Komputer: F205
+    // Skripsi: H1405
+    const scheduleData = [
+      {
+        id: 'visi-komputer',
+        name: 'Visi Komputer',
+        day: 'Senin',
+        dayIndex: 1, // 1 = Monday
+        startTime: '13:20',
+        endTime: '16:00',
+        timeFormatted: 'Senin, 13:20–16:00 WIB',
+        room: 'F205',
+        sks: 3,
+        type: 'Praktikum & Teori Algoritma',
+        flower: '🌸',
+        flowerName: 'Lotus Blossom',
+        accentBg: 'bg-rose-50',
+        borderCol: 'border-rose-200',
+        badgeBg: 'bg-rose-100 text-rose-700',
+        tagGradient: 'from-pink-500 to-rose-400',
+        desc: 'Mempelajari pemrosesan citra digital, ekstraksi fitur visual, deteksi objek, CNN, dan arsitektur penglihatan komputer cerdas.',
+        tasks: ['Pelajari OpenCV & segmentasi citra', 'Tugas Deteksi Objek dengan YOLO']
+      },
+      {
+        id: 'proyek-ti',
+        name: 'Proyek Teknologi Informasi',
+        day: 'Rabu',
+        dayIndex: 3,
+        startTime: '08:00',
+        endTime: '10:50',
+        timeFormatted: 'Rabu, 08:00–10:50 WIB',
+        room: 'H1403',
+        sks: 3,
+        type: 'Capstone Project & Kolaborasi',
+        flower: '🌿',
+        flowerName: 'Ivy & Meadow Fern',
+        accentBg: 'bg-emerald-50',
+        borderCol: 'border-emerald-200',
+        badgeBg: 'bg-emerald-100 text-emerald-800',
+        tagGradient: 'from-emerald-500 to-teal-600',
+        desc: 'Implementasi aplikasi nyata berbasis tim terpadu, agile development sprint, pengujian kualitas perangkat lunak, dan deployment sistem.',
+        tasks: ['Sprint review backlog modul tim', 'Persiapkan deployment demo sistem']
+      },
+      {
+        id: 'proposal-skripsi',
+        name: 'Proposal Skripsi',
+        day: 'Rabu',
+        dayIndex: 3,
+        startTime: '14:20',
+        endTime: '16:00',
+        timeFormatted: 'Rabu, 14:20–16:00 WIB',
+        room: 'H3203',
+        sks: 2,
+        type: 'Seminar & Riset Metodologi',
+        flower: '🌺',
+        flowerName: 'Camellia Petal',
+        accentBg: 'bg-purple-50',
+        borderCol: 'border-purple-200',
+        badgeBg: 'bg-purple-100 text-purple-700',
+        tagGradient: 'from-purple-500 to-indigo-500',
+        desc: 'Penyusunan naskah bab 1-3, perumusan rumusan masalah, telaah pustaka literatur mutakhir, dan pengajuan seminar kelayakan riset.',
+        tasks: ['Review State of The Art jurnal bereputasi', 'Finalisasi BAB 1-3 untuk bimbingan dosen']
+      },
+      {
+        id: 'analisis-medsos',
+        name: 'Analisis Media Sosial',
+        day: 'Kamis',
+        dayIndex: 4,
+        startTime: '08:00',
+        endTime: '10:50',
+        timeFormatted: 'Kamis, 08:00–10:50 WIB',
+        room: 'H1302',
+        sks: 3,
+        type: 'Mining & NLP Analysis',
+        flower: '🌼',
+        flowerName: 'Golden Daisy',
+        accentBg: 'bg-amber-50',
+        borderCol: 'border-amber-200',
+        badgeBg: 'bg-amber-100 text-amber-800',
+        tagGradient: 'from-amber-500 to-orange-400',
+        desc: 'Eksplorasi data teks dan interaksi sosial media, scraping etis, analisis sentimen, pemodelan topik (LDA/BERTopic), dan graf jejaring sosial (SNA).',
+        tasks: ['Crawl dataset Twitter/Instagram', 'Preprocessing teks & TF-IDF/Embedding']
+      },
+      {
+        id: 'data-science',
+        name: 'Data Science',
+        day: 'Jumat',
+        dayIndex: 5,
+        startTime: '13:20',
+        endTime: '16:00',
+        timeFormatted: 'Jumat, 13:20–16:00 WIB',
+        room: 'H3201',
+        sks: 3,
+        type: 'Machine Learning & Big Data',
+        flower: '🌷',
+        flowerName: 'Spring Tulip',
+        accentBg: 'bg-sky-50',
+        borderCol: 'border-sky-200',
+        badgeBg: 'bg-sky-100 text-sky-800',
+        tagGradient: 'from-sky-500 to-blue-500',
+        desc: 'Eksplorasi data lanjutan (EDA), feature engineering, supervised & unsupervised machine learning, validasi model, dan data storytelling.',
+        tasks: ['Eksperimen model classifier di Jupyter/Colab', 'Evaluasi metrik Precision, Recall, ROC-AUC']
+      },
+      {
+        id: 'skripsi',
+        name: 'Skripsi',
+        day: 'Sabtu',
+        dayIndex: 6,
+        startTime: '08:50',
+        endTime: '14:10',
+        timeFormatted: 'Sabtu, 08:50–14:10 WIB',
+        room: 'H1405',
+        sks: 5,
+        type: 'Karya Ilmiah Akhir Mandiri',
+        flower: '🌻',
+        flowerName: 'Royal Sunflower',
+        accentBg: 'bg-rose-50',
+        borderCol: 'border-pink-300',
+        badgeBg: 'bg-pink-100 text-pink-800',
+        tagGradient: 'from-pink-600 via-rose-500 to-amber-500',
+        desc: 'Pelaksanaan eksperimen komprehensif, evaluasi sistem, penulisan manuskrip jurnal ilmiah, bimbingan intensif dan persiapan sidang skripsi.',
+        tasks: ['Uji coba eksperimen komparasi algoritma', 'Tulis draft artikel publikasi ilmiah']
+      }
+    ];
+
+    let currentFilterDay = 'all';
+    let currentSearchQuery = '';
+    let currentViewMode = 'cards';
+    let activeModalCourse = null;
+    let petalsAnimationRunning = true;
+
+    // Load saved tasks from LocalStorage
+    function loadCourseTasks() {
+      const saved = localStorage.getItem('thumbelina_schedule_tasks');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          scheduleData.forEach(course => {
+            if (parsed[course.id]) {
+              course.tasks = parsed[course.id];
+            }
+          });
+        } catch(e) {
+          console.error(e);
+        }
+      }
+    }
+
+    function saveCourseTasks() {
+      const tasksMap = {};
+      scheduleData.forEach(c => {
+        tasksMap[c.id] = c.tasks;
+      });
+      localStorage.setItem('thumbelina_schedule_tasks', JSON.stringify(tasksMap));
+    }
+
+    // Render Cards View
+    function renderCards() {
+      const container = document.getElementById('cards-container');
+      const filtered = getFilteredData();
+      
+      if (filtered.length === 0) {
+        document.getElementById('empty-state').classList.remove('hidden');
+        container.innerHTML = '';
+        return;
+      }
+      document.getElementById('empty-state').classList.add('hidden');
+
+      const now = new Date();
+      const currentDayNumber = now.getDay(); // 0 is Sunday, 1 Monday, etc.
+
+      container.innerHTML = filtered.map(item => {
+        const isToday = (currentDayNumber === item.dayIndex);
+
+        return `
+          <div class="fairy-glass rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl relative overflow-hidden group border ${item.borderCol}">
+            
+            <!-- Top Subtle Shimmer / Accent line -->
+            <div class="h-1.5 w-full bg-gradient-to-r ${item.tagGradient} absolute top-0 left-0"></div>
+
+            <!-- Card Header -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="text-3xl p-2 rounded-2xl bg-white shadow-sm ring-1 ring-pink-100 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                  ${item.flower}
+                </span>
+                <div>
+                  <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${item.badgeBg}">
+                    ${item.day}
+                  </span>
+                  ${isToday ? '<span class="ml-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500 text-white animate-pulse">Hari Ini</span>' : ''}
+                  <h3 class="font-serif text-xl font-bold text-gray-800 group-hover:text-pink-600 transition-colors mt-1">
+                    ${item.name}
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course Meta Information Grid -->
+            <div class="space-y-2.5 my-4 bg-white/70 p-3.5 rounded-2xl border border-pink-100/70 text-xs text-stone-600">
+              
+              <!-- Room / Kelas -->
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-1.5 text-stone-500">
+                  <i class="fa-solid fa-location-dot text-pink-500"></i> Ruang Kelas:
+                </span>
+                <span class="font-mono font-bold text-pink-600 px-2 py-0.5 rounded-lg bg-pink-50 border border-pink-200">
+                  ${item.room}
+                </span>
+              </div>
+
+              <!-- Time -->
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-1.5 text-stone-500">
+                  <i class="fa-regular fa-clock text-amber-500"></i> Waktu:
+                </span>
+                <span class="font-semibold text-gray-800">
+                  ${item.startTime} – ${item.endTime} WIB
+                </span>
+              </div>
+
+              <!-- SKS -->
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-1.5 text-stone-500">
+                  <i class="fa-solid fa-graduation-cap text-purple-500"></i> Bobot:
+                </span>
+                <span class="font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-lg">
+                  ${item.sks} SKS
+                </span>
+              </div>
+
+              <!-- Type -->
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-1.5 text-stone-500">
+                  <i class="fa-solid fa-bookmark text-emerald-500"></i> Kategori:
+                </span>
+                <span class="font-medium text-emerald-700 truncate max-w-[150px]" title="${item.type}">
+                  ${item.type}
+                </span>
+              </div>
+
+            </div>
+
+            <!-- Card Actions & Progress -->
+            <div class="pt-2 flex items-center justify-between">
+              <span class="text-[11px] text-stone-400 font-medium">
+                <i class="fa-solid fa-tasks mr-1"></i> ${item.tasks ? item.tasks.length : 0} Catatan / Tugas
+              </span>
+              <button onclick="openCourseModal('${item.id}')" class="px-3 py-1.5 rounded-xl bg-pink-100/80 hover:bg-pink-200 text-pink-700 text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
+                <span>Detail & Tugas</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Botanical Table View
+    function renderTable() {
+      const tbody = document.getElementById('table-body');
+      const filtered = getFilteredData();
+
+      if (filtered.length === 0) {
+        document.getElementById('empty-state').classList.remove('hidden');
+        tbody.innerHTML = '';
+        return;
+      }
+      document.getElementById('empty-state').classList.add('hidden');
+
+      const now = new Date();
+      const currentDayNumber = now.getDay();
+
+      tbody.innerHTML = filtered.map((item, idx) => {
+        const isToday = (currentDayNumber === item.dayIndex);
+        const bgStriped = idx % 2 === 0 ? 'bg-white/50' : 'bg-pink-50/20';
+
+        return `
+          <tr class="${bgStriped} hover:bg-pink-100/40 transition-colors">
+            
+            <!-- Course Name with flower icon -->
+            <td class="py-4 px-6">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">${item.flower}</span>
+                <div>
+                  <div class="font-bold text-gray-900 hover:text-pink-600 transition-colors font-serif text-base">
+                    ${item.name}
+                  </div>
+                  <span class="text-xs text-stone-400 font-sans">${item.type}</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Room / Kelas Badge -->
+            <td class="py-4 px-6 text-center">
+              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-pink-50 text-pink-700 font-mono font-bold text-xs border border-pink-200 shadow-sm">
+                <i class="fa-solid fa-location-dot text-[10px]"></i> ${item.room}
+              </span>
+            </td>
+
+            <!-- SKS -->
+            <td class="py-4 px-6 text-center">
+              <span class="inline-block px-2.5 py-0.5 rounded-lg bg-purple-50 text-purple-700 font-bold text-xs">
+                ${item.sks} SKS
+              </span>
+            </td>
+
+            <!-- Schedule / Time -->
+            <td class="py-4 px-6">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-md font-bold text-xs ${item.badgeBg}">
+                  ${item.day}
+                </span>
+                ${isToday ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500 text-white font-bold">Hari Ini</span>' : ''}
+              </div>
+              <div class="text-xs text-stone-600 font-medium mt-1">
+                ${item.startTime} – ${item.endTime} WIB
+              </div>
+            </td>
+
+            <!-- Action -->
+            <td class="py-4 px-6 text-center no-print">
+              <button onclick="openCourseModal('${item.id}')" class="px-3 py-1 rounded-full bg-pink-100 hover:bg-pink-200 text-pink-700 text-xs font-semibold transition">
+                <i class="fa-regular fa-eye mr-1"></i> Buka
+              </button>
+            </td>
+
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Render Weekly Timeline View
+    function renderTimeline() {
+      const container = document.getElementById('timeline-container');
+      const filtered = getFilteredData();
+
+      if (filtered.length === 0) {
+        document.getElementById('empty-state').classList.remove('hidden');
+        container.innerHTML = '';
+        return;
+      }
+      document.getElementById('empty-state').classList.add('hidden');
+
+      // Group filtered items by Day
+      const daysOrder = ['Senin', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      const grouped = {};
+      daysOrder.forEach(d => grouped[d] = []);
+
+      filtered.forEach(item => {
+        if (!grouped[item.day]) grouped[item.day] = [];
+        grouped[item.day].push(item);
+      });
+
+      const now = new Date();
+      const currentDayNumber = now.getDay();
+
+      container.innerHTML = daysOrder.filter(d => grouped[d] && grouped[d].length > 0).map(dayName => {
+        const dayCourses = grouped[dayName];
+        const dayIdx = dayCourses[0].dayIndex;
+        const isToday = (currentDayNumber === dayIdx);
+
+        return `
+          <div class="fairy-glass rounded-3xl p-5 sm:p-6 border border-pink-200 shadow-sm relative overflow-hidden">
+            <!-- Day Header Ribbon -->
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-pink-100">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-400 text-white flex items-center justify-center font-bold text-sm shadow">
+                  ${dayName.substring(0, 3)}
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-serif text-xl font-bold text-gray-800">${dayName}</h3>
+                    ${isToday ? '<span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500 text-white font-bold animate-pulse">Hari Kuliah Ini</span>' : ''}
+                  </div>
+                  <p class="text-xs text-stone-500">${dayCourses.length} Mata Kuliah Terjadwal</p>
+                </div>
+              </div>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full bg-pink-50 text-pink-700 border border-pink-200">
+                ${dayCourses.reduce((acc, c) => acc + c.sks, 0)} SKS Total
+              </span>
+            </div>
+
+            <!-- Flow of Classes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${dayCourses.map(course => `
+                <div class="p-4 rounded-2xl bg-white/80 border border-pink-100 hover:border-pink-300 transition flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <span class="text-2xl">${course.flower}</span>
+                    <div>
+                      <h4 class="font-bold text-sm text-gray-800">${course.name}</h4>
+                      <p class="text-xs text-stone-500">
+                        <i class="fa-regular fa-clock text-amber-500 mr-1"></i>${course.startTime} - ${course.endTime} WIB
+                      </p>
+                    </div>
+                  </div>
+                  <div class="text-right shrink-0">
+                    <span class="font-mono text-xs font-bold text-pink-600 block bg-pink-50 px-2 py-0.5 rounded border border-pink-200">
+                      ${course.room}
+                    </span>
+                    <button onclick="openCourseModal('${course.id}')" class="text-[11px] text-pink-500 hover:underline mt-1 block">
+                      Catatan <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Filter Logic
+    function getFilteredData() {
+      return scheduleData.filter(item => {
+        const matchesDay = (currentFilterDay === 'all' || item.day === currentFilterDay);
+        const q = currentSearchQuery.toLowerCase();
+        const matchesQuery = !q || (
+          item.name.toLowerCase().includes(q) ||
+          item.room.toLowerCase().includes(q) ||
+          item.day.toLowerCase().includes(q) ||
+          item.type.toLowerCase().includes(q)
+        );
+        return matchesDay && matchesQuery;
+      });
+    }
+
+    function filterDay(day) {
+      currentFilterDay = day;
+      
+      // Update UI buttons
+      document.querySelectorAll('.day-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-day') === day) {
+          btn.className = "day-filter-btn active-filter px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-pink-500 text-white shadow-sm shadow-pink-300/40";
+        } else {
+          btn.className = "day-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200";
+        }
+      });
+
+      renderCurrentView();
+    }
+
+    function handleSearch(val) {
+      currentSearchQuery = val;
+      renderCurrentView();
+    }
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      
+      const cardsView = document.getElementById('cards-view');
+      const tableView = document.getElementById('table-view');
+      const timelineView = document.getElementById('timeline-view');
+
+      const cardBtn = document.getElementById('view-card-btn');
+      const tableBtn = document.getElementById('view-table-btn');
+      const timeBtn = document.getElementById('view-timeline-btn');
+
+      // Hide all
+      cardsView.classList.add('hidden');
+      tableView.classList.add('hidden');
+      timelineView.classList.add('hidden');
+
+      // Reset button styles
+      [cardBtn, tableBtn, timeBtn].forEach(b => {
+        b.className = "px-3 py-1 rounded-full text-xs font-semibold transition-all text-stone-600 hover:text-pink-600";
+      });
+
+      if (mode === 'cards') {
+        cardsView.classList.remove('hidden');
+        cardBtn.className = "px-3 py-1 rounded-full text-xs font-semibold transition-all bg-white text-pink-600 shadow-sm";
+      } else if (mode === 'table') {
+        tableView.classList.remove('hidden');
+        tableBtn.className = "px-3 py-1 rounded-full text-xs font-semibold transition-all bg-white text-pink-600 shadow-sm";
+      } else if (mode === 'timeline') {
+        timelineView.classList.remove('hidden');
+        timeBtn.className = "px-3 py-1 rounded-full text-xs font-semibold transition-all bg-white text-pink-600 shadow-sm";
+      }
+
+      renderCurrentView();
+    }
+
+    function renderCurrentView() {
+      if (currentViewMode === 'cards') renderCards();
+      else if (currentViewMode === 'table') renderTable();
+      else if (currentViewMode === 'timeline') renderTimeline();
+    }
+
+    // Modal Details Logic
+    function openCourseModal(courseId) {
+      const course = scheduleData.find(c => c.id === courseId);
+      if (!course) return;
+      activeModalCourse = course;
+
+      document.getElementById('modal-flower-icon').innerText = course.flower;
+      document.getElementById('modal-flower-icon').className = `w-12 h-12 rounded-2xl flex items-center justify-center text-2xl text-white shadow-md bg-gradient-to-tr ${course.tagGradient}`;
+      
+      document.getElementById('modal-day-badge').innerText = course.day;
+      document.getElementById('modal-day-badge').className = `px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${course.badgeBg}`;
+      
+      document.getElementById('modal-course-name').innerText = course.name;
+      document.getElementById('modal-room-code').innerText = course.room;
+      document.getElementById('modal-sks-count').innerText = `${course.sks} SKS`;
+      document.getElementById('modal-time-range').innerText = `${course.startTime} - ${course.endTime} WIB`;
+      document.getElementById('modal-category').innerText = course.type;
+      document.getElementById('modal-description').innerText = course.desc;
+
+      renderModalTasks();
+
+      const modal = document.getElementById('course-modal');
+      const card = document.getElementById('modal-card');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }, 10);
+    }
+
+    function closeCourseModal() {
+      const modal = document.getElementById('course-modal');
+      const card = document.getElementById('modal-card');
+      modal.classList.add('opacity-0');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        activeModalCourse = null;
+      }, 300);
+    }
+
+    function renderModalTasks() {
+      if (!activeModalCourse) return;
+      const container = document.getElementById('modal-tasks-container');
+      
+      if (!activeModalCourse.tasks || activeModalCourse.tasks.length === 0) {
+        container.innerHTML = `<p class="text-stone-400 text-xs italic py-2">Belum ada catatan tugas untuk matkul ini.</p>`;
+        return;
+      }
+
+      container.innerHTML = activeModalCourse.tasks.map((task, idx) => `
+        <div class="flex items-center justify-between p-2 rounded-xl bg-pink-50/40 border border-pink-100 text-xs">
+          <span class="text-stone-700 flex items-center gap-2">
+            <i class="fa-regular fa-circle-check text-pink-500"></i> ${task}
+          </span>
+          <button onclick="removeModalTask(${idx})" class="text-stone-400 hover:text-rose-500 px-1" title="Hapus task">
+            <i class="fa-solid fa-trash text-xs"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function addModalTask() {
+      const input = document.getElementById('new-task-input');
+      const val = input.value.trim();
+      if (!val || !activeModalCourse) return;
+
+      if (!activeModalCourse.tasks) activeModalCourse.tasks = [];
+      activeModalCourse.tasks.push(val);
+      input.value = '';
+      saveCourseTasks();
+      renderModalTasks();
+      renderCurrentView(); // update card counter
+    }
+
+    function removeModalTask(idx) {
+      if (!activeModalCourse || !activeModalCourse.tasks) return;
+      activeModalCourse.tasks.splice(idx, 1);
+      saveCourseTasks();
+      renderModalTasks();
+      renderCurrentView();
+    }
+
+    // Quick Sticky Note in Footer
+    function loadQuickStickyNote() {
+      const note = localStorage.getItem('thumbelina_quick_sticky');
+      if (note) {
+        document.getElementById('quick-sticky-note').value = note;
+      }
+    }
+
+    function saveQuickNote() {
+      const note = document.getElementById('quick-sticky-note').value;
+      localStorage.setItem('thumbelina_quick_sticky', note);
+      const status = document.getElementById('note-saved-status');
+      status.innerText = "Tersimpan! ✨";
+      status.classList.add('text-pink-600', 'font-semibold');
+      setTimeout(() => {
+        status.innerText = "Catatan tersinkronisasi";
+        status.classList.remove('text-pink-600', 'font-semibold');
+      }, 2000);
+    }
+
+    // Live Clock & Today's Schedule Banner
+    function updateClockAndTodayStatus() {
+      const now = new Date();
+      
+      // Indonesian Date String
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const dateStr = now.toLocaleDateString('id-ID', options);
+      
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      
+      const dayDateEl = document.getElementById('live-day-date');
+      const timeEl = document.getElementById('live-time');
+      if (dayDateEl) dayDateEl.innerText = dateStr;
+      if (timeEl) timeEl.innerText = `${hours}:${minutes}:${seconds} WIB`;
+
+      // Check Today's classes
+      const dayIndex = now.getDay();
+      const dayMap = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      const todayName = dayMap[dayIndex];
+      const todayClasses = scheduleData.filter(c => c.dayIndex === dayIndex);
+
+      const alertContainer = document.getElementById('today-alert-container');
+      if (!alertContainer) return;
+
+      if (todayClasses.length > 0) {
+        alertContainer.innerHTML = `
+          <div class="fairy-glass p-4 sm:p-5 rounded-2xl border-l-4 border-l-pink-500 border border-pink-200 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm animate-pulseSlow">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-lg shadow-sm">
+                🌸
+              </span>
+              <div>
+                <h4 class="font-serif font-bold text-gray-800 text-base">
+                  Hari ini (${todayName}): Ada <span class="text-pink-600">${todayClasses.length} Mata Kuliah Aktif</span>
+                </h4>
+                <p class="text-xs text-stone-500">
+                  ${todayClasses.map(c => `<strong class="text-stone-700">${c.name}</strong> di ruang <span class="font-mono text-pink-600 font-bold">${c.room}</span> (${c.startTime})`).join(' • ')}
+                </p>
+              </div>
+            </div>
+            <button onclick="filterDay('${todayName}')" class="shrink-0 px-4 py-1.5 rounded-full bg-pink-500 hover:bg-pink-600 text-white text-xs font-semibold shadow transition">
+              Lihat Hari Ini
+            </button>
+          </div>
+        `;
+      } else {
+        alertContainer.innerHTML = `
+          <div class="fairy-glass p-4 rounded-2xl border border-pink-100/80 flex items-center justify-between gap-3 text-xs text-stone-600 shadow-sm">
+            <div class="flex items-center gap-2.5">
+              <span class="text-lg">🌿</span>
+              <span>Hari ini (<strong>${todayName}</strong>) tidak ada jadwal tatap muka. Waktunya relaksasi atau riset mandiri di taman bunga!</span>
+            </div>
+            <span class="text-pink-600 font-script text-base">Happy Resting ✨</span>
+          </div>
+        `;
+      }
+    }
+
+    // ==================== PETALS FALLING CANVAS ANIMATION ====================
+    let canvas, ctx;
+    let petals = [];
+    const petalCount = 32;
+
+    function initPetalsCanvas() {
+      canvas = document.getElementById('petals-canvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      petals = [];
+      for (let i = 0; i < petalCount; i++) {
+        petals.push(createPetal());
+      }
+
+      requestAnimationFrame(animatePetals);
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createPetal() {
+      return {
+        x: Math.random() * (canvas ? canvas.width : window.innerWidth),
+        y: Math.random() * -100,
+        size: Math.random() * 8 + 6,
+        speedX: Math.random() * 1.5 - 0.75,
+        speedY: Math.random() * 1.2 + 0.8,
+        angle: Math.random() * 360,
+        spin: (Math.random() - 0.5) * 2,
+        color: Math.random() > 0.4 ? 'rgba(255, 182, 193, 0.65)' : 'rgba(255, 228, 235, 0.75)',
+        alpha: Math.random() * 0.5 + 0.3
+      };
+    }
+
+    function animatePetals() {
+      if (!petalsAnimationRunning) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      petals.forEach(petal => {
+        petal.y += petal.speedY;
+        petal.x += Math.sin(petal.y * 0.01) * 0.8 + petal.speedX;
+        petal.angle += petal.spin;
+
+        if (petal.y > canvas.height + 20) {
+          petal.y = -20;
+          petal.x = Math.random() * canvas.width;
+        }
+
+        ctx.save();
+        ctx.translate(petal.x, petal.y);
+        ctx.rotate((petal.angle * Math.PI) / 180);
+        ctx.fillStyle = petal.color;
+        
+        // Draw organic petal oval curve
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(petal.size, -petal.size * 0.7, petal.size * 1.5, 0);
+        ctx.quadraticCurveTo(petal.size, petal.size * 0.7, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      requestAnimationFrame(animatePetals);
+    }
+
+    function togglePetalsAnimation() {
+      petalsAnimationRunning = !petalsAnimationRunning;
+      const btnText = document.getElementById('petals-btn-text');
+      if (petalsAnimationRunning) {
+        btnText.innerText = "Kelopak Bunga: Aktif";
+        animatePetals();
+      } else {
+        btnText.innerText = "Kelopak Bunga: Nonaktif";
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    // Poster 9:16 Modal handlers
+    function openPosterModal() {
+      const modal = document.getElementById('poster-modal');
+      const card = document.getElementById('poster-modal-card');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }, 10);
+    }
+
+    function closePosterModal() {
+      const modal = document.getElementById('poster-modal');
+      const card = document.getElementById('poster-modal-card');
+      modal.classList.add('opacity-0');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    // Modal click outside to close
+    window.addEventListener('click', (e) => {
+      const courseModal = document.getElementById('course-modal');
+      const posterModal = document.getElementById('poster-modal');
+      if (e.target === courseModal) {
+        closeCourseModal();
+      }
+      if (e.target === posterModal) {
+        closePosterModal();
+      }
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCourseModal();
+        closePosterModal();
+      }
+    });
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCourseTasks();
+      loadQuickStickyNote();
+      renderCurrentView();
+      updateClockAndTodayStatus();
+      setInterval(updateClockAndTodayStatus, 1000);
+      initPetalsCanvas();
+    });
+  </script>
+
+</body>
+</html>
